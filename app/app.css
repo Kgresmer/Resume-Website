@@ -1,4 +1,20 @@
-/* app css stylesheet */
+body {
+  padding-top: 80px;
+}
+
+.templates {
+  text-align: center;
+}
+
+.templates img{
+  width: 70%;
+}
+
+.templates a{
+  width: 50%;
+  text-align: center;
+  margin: auto;
+}
 
 .menu {
   list-style: none;
