@@ -23,6 +23,11 @@ angular.module('templateStore.templates', ['ngRoute'])
                 return d.id == templateId;
             })[0];
             $scope.mainImage = $scope.template.images[0].name;
+
+            $scope.setImage = function (image) {
+                $scope.mainImage = image.name;
+            }
+
         }, function errorCallback(response) {
             console.log('Error' + response);
         });
