@@ -1,54 +1,96 @@
 body {
-  padding-top: 80px;
+  background:url('img/lake.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-.templates {
-  text-align: center;
-}
-
-.img-full {
+.layer {
+  background-color: rgba(80, 88, 96, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
 }
 
-.templates img{
-  width: 70%;
+.navbar {
+  background-color: transparent;
+  border: none;
 }
 
-.templates a{
-  width: 50%;
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-default .navbar-nav>li {
+  margin-top: 3rem;
   text-align: center;
-  margin: auto;
 }
 
-.templates .col-md-4 {
-  margin-bottom: 20px;
+.skybtn {
+  border: none;
+  border-radius: 25%;
+  display: block;
+  background-color: #848484;
+  font-family: 'trebuchet ms';
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  margin: 1rem;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
 }
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
+.skybtn::before {
   content: "";
-  padding: 0;
+  border-radius: 25%;
+  text-decoration: none;
+  box-shadow: 7px 7px 0 #e6f0fb,
+  15px 15px 0 #bfbfbf;
+  position: absolute;
+  left: 0.25rem;
+  top: 0.5rem;
+  height: 102%;
+  width: 102%;
+  z-index: -1;
+  transition: all 0.4s ease;
 }
+
+.skybtn:hover::before {
+  border-radius: 25%;
+  box-shadow: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+#headshot {
+  border-radius: 100%;
+  border: whitesmoke 2px solid;
+  width: 70px;
+  text-align: center;
+}
+
+.headerButtons {
+  line-height: 30px;
+  text-align: center;
+}
+
+
+
+
