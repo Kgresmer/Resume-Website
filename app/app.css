@@ -1,16 +1,19 @@
 body {
-  background:url('img/lake.jpg') no-repeat center center fixed;
+  background:url('img/mountains.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  color: white;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 .layer {
-  background-color: rgba(80, 88, 96, 0.6);
+  background-color: rgba(80, 88, 96, 0.7);
   position: absolute;
   top: 0;
   left: 0;
+  padding-bottom: 4000px;
   width: 100%;
   height: 100%;
 }
@@ -39,18 +42,21 @@ a:hover {
   text-align: center;
 }
 
+hr {
+  border-color: #03631d;
+}
+
 .skybtn {
-  border: none;
   border-radius: 25%;
   display: block;
-  background-color: #848484;
-  font-family: 'trebuchet ms';
+  border: #5a8b67 2px solid;
+  background-color: transparent;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
   margin: 1rem;
   position: relative;
   text-decoration: none;
-  text-transform: uppercase;
   text-align: center;
 }
 
@@ -58,8 +64,8 @@ a:hover {
   content: "";
   border-radius: 25%;
   text-decoration: none;
-  box-shadow: 7px 7px 2px #e6f0fb,
-  15px 15px 4px #bfbfbf;
+  box-shadow: 5px 5px 1px #5a8b67,
+  10px 10px 2px #9dbaa5;
   position: absolute;
   left: 0.25rem;
   top: 0.5rem;
@@ -72,6 +78,7 @@ a:hover {
 .skybtn:hover::before {
   border-radius: 25%;
   box-shadow: none;
+  color: white;
   left: 0;
   top: 0;
   width: 100%;
@@ -81,7 +88,7 @@ a:hover {
 
 #headshot {
   border-radius: 100%;
-  border: whitesmoke 2px solid;
+  border: #5a8b67 2px solid;
   width: 70px;
   text-align: center;
 }

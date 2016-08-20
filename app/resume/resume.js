@@ -9,6 +9,9 @@ angular.module('mainPage.resume', ['ngRoute'])
   });
 }])
 
-.controller('ResumeController', [function() {
-
+.controller('ResumeController', ['$scope', '$http', function($scope, $http) {
+  $http.get('json/experience.json')
+      .then(function(response) {
+          $scope.jobs = response.data;
+      });
 }]);

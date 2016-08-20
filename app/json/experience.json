@@ -1,0 +1,38 @@
+[
+  {
+    "title" : "Associate Software Developer",
+    "company" : "Expeditors International",
+    "startDate" : "2015-12-30",
+    "endDate" : null,
+    "location": "Seattle, WA",
+    "description" : "Full stack web developer - Maintain four large code bases, add features and lots of debugging. Tech: Java, Axon, Kafka, Spring, NodeJS, Grunt, AngularJS, Typescript, Native Javascript, SASS and CSS, HTML. \nDatabase: H2, DB2, PostgreSQL\n Other tools: Putty, DBVisualizer, Chrome Debugger",
+    "logo" : "img/expd.png"
+  },
+  {
+    "title" : "Apprentice Java Developer",
+    "company" : "The Software Guild - Coding Bootcamp",
+    "startDate" : "2015-08-03",
+    "endDate" : "2015-11-13",
+    "location": "Minneapolis, MN",
+    "description" : "Java Language Fundamentals – variable declaration, looping constructs, conditional statements, class modeling, exception handling, unit testing and n-tier application structure.\n Web Development Fundamentals – Spring MVC, HTML, CSS, JavaScript, and jQuery.\n Database Fundamentals: MySQL, SQL Query Writing, Table Creation, Spring JDBC, Hibernate. \nProject Management Fundamentals – Wire-framing, User Stories, work estimation, and iterative development.",
+    "logo" : "img/sguild.png"
+  },
+  {
+    "title" : "Environmental Engineer, E.I.T.",
+    "company" : "ENVIRONEERING, Inc.",
+    "startDate" : "2014-05-14",
+    "endDate" : "2015-08-01",
+    "location": "Houston, TX",
+    "description" : "Develop work plans and completion documents for various remediation projects ranging from decontaminating lagoons to hazardous soil removal. Create and manipulate maps using ArcGIS and AutoCAD. Create and/or update stormwater pollution prevention plans, spill prevention, control and countermeasure plans and general permits. Complete on-site inspections of stormwater outfalls, monitoring wells and various other projects. Complete on-site tasks as a project engineer including, but not limited to; laying out target soil removal areas using GPS coordinates, sampling soil and water, coordinate excavation crew, characterize waste for transfer to landfill.",
+    "logo" : "img/enviro.png"
+  },
+  {
+    "title" : "Chemical Sales Engineer/District Engineer",
+    "company" : "Nalco Water, an Ecolab Company",
+    "startDate" : "2012-12-28",
+    "endDate" : "2014-05-06",
+    "location": "Houston, TX",
+    "description" : "Maintain twenty accounts including; inventory management, calibration of equipment, troubleshooting any issues, quarterly business reviews and regular service visits including on-site water analysis. Also in this position, I performed full system evaluations and wastewater jar testing using various Nalco chemicals. A primary focus on metals and TSS removal. As well as testing the capabilities of new chemicals for metals removal utilizing sulfide precipitation. The second part of the position involved expanding my territory, selling new business and expanding the business within current accounts.",
+    "logo" : "img/nalco.png"
+  }
+]

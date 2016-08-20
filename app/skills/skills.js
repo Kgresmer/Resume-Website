@@ -7,9 +7,5 @@ angular.module('mainPage.skills', ['ngRoute'])
         });
     }])
     .controller('SkillsController', ['$scope', '$http', function ($scope, $http) {
-        $http.get('json/templates.json').then(function (response) {
-            $scope.templates = response.data;
-        }, function errorCallback(response) {
-            console.log('Error' + response);
-        });
+        
     }]);

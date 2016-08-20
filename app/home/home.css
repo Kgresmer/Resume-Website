@@ -1,0 +1,15 @@
+.homePageInfo {
+    border-left: #5a8b67 3px solid;
+    margin-left: 1rem;
+}
+
+.homeHeadshot {
+    border-radius: 100%;
+    border: #5a8b67 3px solid;
+    width: 250px;
+    text-align: center;
+}
+
+.frontPage {
+    margin-top: 1rem;
+}
