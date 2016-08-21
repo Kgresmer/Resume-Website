@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('mainPage', [
     'ngRoute',
+    'ngAnimate',
     'mainPage.home',
     'mainPage.resume',
     'mainPage.skills',
@@ -18,8 +19,6 @@ angular.module('mainPage', [
                 $scope.headshot = 'img/headshot3.jpg';
             } else if(next.includes('resume')) {
                 $scope.headshot = 'img/headshot.jpg';
-            } else if(next.includes('skills')) {
-                $scope.headshot = 'img/headshot2.jpg';
             } else {
                 $scope.headshot = 'img/headshot4.jpg';
             }

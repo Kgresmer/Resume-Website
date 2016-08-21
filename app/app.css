@@ -1,21 +1,11 @@
 body {
-  background:url('img/mountains.jpg') no-repeat center center fixed;
+  background:url('img/mountainsdarkened.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color: white;
+  color: #d8d6d6;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-}
-
-.layer {
-  background-color: rgba(80, 88, 96, 0.7);
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-bottom: 4000px;
-  width: 100%;
-  height: 100%;
 }
 
 .navbar {
@@ -23,36 +13,34 @@ body {
   border: none;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
-a:hover {
-  text-decoration: none;
-  color: white;
+.navbar-nav {
+  border-bottom: #d8d6d6 2px solid;
 }
 
 .navbar-default .navbar-nav>li>a {
-  color: white;
+  color: #d8d6d6;
+  text-decoration: none;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  outline: 2px solid white;
+  text-decoration: none;
 }
 
 .navbar-default .navbar-nav>li {
   margin-top: 3rem;
   text-align: center;
+  color: #d8d6d6;
 }
 
 hr {
-  border-color: #03631d;
+  border-color: #2b669a;
 }
 
 .skybtn {
-  border-radius: 25%;
   display: block;
-  border: #5a8b67 2px solid;
-  background-color: transparent;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size: 1.5rem;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 2.2rem;
   letter-spacing: 0.1rem;
   margin: 1rem;
   position: relative;
@@ -60,35 +48,9 @@ hr {
   text-align: center;
 }
 
-.skybtn::before {
-  content: "";
-  border-radius: 25%;
-  text-decoration: none;
-  box-shadow: 5px 5px 1px #5a8b67,
-  10px 10px 2px #9dbaa5;
-  position: absolute;
-  left: 0.25rem;
-  top: 0.5rem;
-  height: 102%;
-  width: 102%;
-  z-index: -1;
-  transition: all 0.4s ease;
-}
-
-.skybtn:hover::before {
-  border-radius: 25%;
-  box-shadow: none;
-  color: white;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-}
-
 #headshot {
   border-radius: 100%;
-  border: #5a8b67 2px solid;
+  border: #2b669a 2px solid;
   width: 70px;
   text-align: center;
 }

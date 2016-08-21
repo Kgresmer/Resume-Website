@@ -1,6 +1,14 @@
 .jobBackground {
-    color: white;
+    color: #d8d6d6;
     padding: 10px 4px 8px 10px;
-    border-radius: 8px;
     margin-bottom: 30px;
+    border-bottom: #23527c 2px solid;
+}
+
+.logos {
+    box-shadow: 3px 3px 2px #c7ddef;
+}
+
+.skillList {
+    left: -50px;
 }

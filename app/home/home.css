@@ -1,15 +1,17 @@
 .homePageInfo {
-    border-left: #5a8b67 3px solid;
-    margin-left: 1rem;
+    border-left: #2b669a 3px solid;
+    margin-left: 2rem;
+    color: #d8d6d6;
+    font-weight: bold;
 }
 
 .homeHeadshot {
     border-radius: 100%;
-    border: #5a8b67 3px solid;
+    border: #2b669a 3px solid;
     width: 250px;
     text-align: center;
 }
 
 .frontPage {
-    margin-top: 1rem;
+    margin-top: 7rem;
 }

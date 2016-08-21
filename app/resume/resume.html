@@ -1,19 +1,155 @@
 <div class="container">
-    <div class="hero-unit">
-        <h1>Employment History</h1>
-    </div>
-    <div ng-repeat="job in jobs" class="jobBackground">
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                <h3>{{job.title}}</h3>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 skillList">
+        <div class="container">
+            <h3>Technical Skills</h3>
+            <div class="container category">
+                <span>Java &nbsp;</span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in javaSquares">
+                        <div class="parallelogram">&nbsp;</div>
+                    </li>
+                </ul>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <img ng-src="{{job.logo}}">
+            <div class="container category">
+                <span>Spring &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in springSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>Axon &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in axonSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>Kafka &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in kafkaSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>NodeJS &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in nodeSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>Grunt &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in gruntSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>Bower &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in bowerSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>AngularJS &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in angularSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>Typescript &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in typeSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>Javascript &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in javascriptSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>SASS &nbsp;</span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in sassSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>CSS &nbsp;</span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in cssSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>HTML &nbsp;</span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in htmlSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <h4>Database Skills</h4>
+            <div class="container category">
+                <span>H2 &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in h2Squares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>DB2 &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in db2Squares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container category">
+                <span>PostgreSQL &nbsp; </span>
+                <ul>
+                    <li class="boxes" ng-repeat="square in postSquares">
+                        <div class="parallelogram">&nbsp; </div>
+                    </li>
+                </ul>
             </div>
         </div>
-        <h4>{{job.company}}</h4>
-        <p>{{job.startDate}} - {{job.endDate ? job.endDate : 'Now'}} | {{job.location}}</p>
-        <p>{{job.description}}</p>
-        <hr>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <div class="hero-unit">
+            <h1>Employment History</h1>
+        </div>
+        <div ng-repeat="job in jobs" class="jobBackground">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <h3>{{job.title}}</h3>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <img class="logos" ng-src="{{job.logo}}">
+                </div>
+            </div>
+            <h4>{{job.company}}</h4>
+            <p>{{job.startDate}} - {{job.endDate ? job.endDate : 'Now'}} | {{job.location}}</p>
+            <p>{{job.description}}</p>
+
+        </div>
     </div>
 </div>

@@ -14,4 +14,21 @@ angular.module('mainPage.resume', ['ngRoute'])
       .then(function(response) {
           $scope.jobs = response.data;
       });
+
+    $scope.javaSquares = [{}, {}, {}, {}, {}, {}];
+    $scope.springSquares = [{}, {}, {}, {}, {}];
+    $scope.axonSquares = [{}, {}, {}, {}, {}];
+    $scope.kafkaSquares = [{}, {}, {}, {}, {}];
+    $scope.nodeSquares = [{}, {}, {}, {}, {}];
+    $scope.gruntSquares = [{}, {}, {}, {}, {}];
+    $scope.bowerSquares = [{}, {}, {}, {}, {}];
+    $scope.angularSquares = [{}, {}, {}, {}, {}];
+    $scope.typeSquares = [{}, {}, {}, {}, {}];
+    $scope.javascriptSquares = [{}, {}, {}, {}, {}];
+    $scope.sassSquares = [{}, {}, {}, {}, {}];
+    $scope.cssSquares = [{}, {}, {}, {}, {}];
+    $scope.htmlSquares = [{}, {}, {}, {}, {}];
+    $scope.h2Squares = [{}, {}, {}, {}, {}];
+    $scope.db2Squares = [{}, {}, {}, {}, {}];
+    $scope.postSquares = [{}, {}, {}, {}, {}];
 }]);
