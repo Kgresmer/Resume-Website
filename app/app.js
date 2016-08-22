@@ -3,7 +3,6 @@
 // Declare app level module which depends on views, and components
 angular.module('mainPage', [
     'ngRoute',
-    'ngAnimate',
     'mainPage.home',
     'mainPage.resume',
     'mainPage.skills',
