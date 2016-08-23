@@ -5,8 +5,8 @@ angular.module('mainPage', [
     'ngRoute',
     'mainPage.home',
     'mainPage.resume',
-    'mainPage.skills',
-    'mainPage.work'
+    'mainPage.work',
+    'mainPage.contact'
 ])
     .config(['$locationProvider', '$routeProvider', 
         function ($locationProvider, $routeProvider) {

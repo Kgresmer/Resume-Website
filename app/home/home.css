@@ -15,3 +15,11 @@
 .frontPage {
     margin-top: 7rem;
 }
+
+#title {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    padding: 10px 0 10px 0;
+    border-bottom: #d8d6d6 2px solid;
+    border-top: #d8d6d6 2px solid;
+    display:table;
+}

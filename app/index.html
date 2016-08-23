@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="resume/resume.css">
     <link rel="stylesheet" href="home/home.css">
-    <link rel="stylesheet" href="skills/skills.css">
 </head>
 <body ng-controller="mainCtrl">
 <div>
@@ -51,7 +50,7 @@
         <![endif]-->
 
         <div ng-view></div>
-
+        <div ng-include="'footer/footer.html'"></div>
         <!--<div>Angular seed app: v<span app-version></span></div>-->
 
 
@@ -68,7 +67,7 @@
     <script src="home/home.js"></script>
     <script src="work/work.js"></script>
     <script src="resume/resume.js"></script>
-    <script src="skills/skills.js"></script>
+    <script src="contact/contact.js"></script>
 </div>
 </body>
 </html>

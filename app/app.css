@@ -17,7 +17,7 @@ body {
   border-bottom: #d8d6d6 2px solid;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav>li>a  {
   color: #d8d6d6;
   text-decoration: none;
 }
@@ -25,11 +25,26 @@ body {
 .navbar-default .navbar-nav>li>a:hover {
   outline: 2px solid white;
   text-decoration: none;
+  color: #d8d6d6;
 }
 
 .navbar-default .navbar-nav>li {
   margin-top: 3rem;
   text-align: center;
+  color: #d8d6d6;
+}
+
+#footer {
+  outline: none;
+  border: none;
+  color: #d8d6d6;
+  text-decoration: none;
+}
+
+#footer:hover {
+  background-color: transparent;
+  outline: 2px solid white;
+  text-decoration: none;
   color: #d8d6d6;
 }
 

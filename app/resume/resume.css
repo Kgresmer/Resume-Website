@@ -12,3 +12,34 @@
 .skillList {
     left: -50px;
 }
+
+
+.skillsList>div {
+}
+
+.boxes {
+    float: left;
+}
+
+span {
+    float: left;
+}
+
+ul {
+    list-style: none;
+}
+
+.category {
+    margin-bottom: 1rem;
+}
+
+.parallelogram {
+    width: 20px;
+    height: 12px;
+    -webkit-transform: skew(20deg);
+    -moz-transform: skew(20deg);
+    -o-transform: skew(20deg);
+    background: #204d74;
+    margin: 2px;
+    box-shadow: 2px 2px 2px #c7ddef;
+}
