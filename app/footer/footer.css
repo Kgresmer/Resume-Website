@@ -1,0 +1,16 @@
+
+.footer {
+    outline: none;
+    border: none;
+    color: #d8d6d6;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.footer:hover {
+    background-color: transparent;
+    outline: 2px solid white;
+    text-decoration: none;
+    color: #d8d6d6;
+}
+

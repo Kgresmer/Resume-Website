@@ -6,7 +6,8 @@ angular.module('mainPage', [
     'mainPage.home',
     'mainPage.resume',
     'mainPage.work',
-    'mainPage.contact'
+    'mainPage.contact',
+    'mainPage.algorithm'
 ])
     .config(['$locationProvider', '$routeProvider', 
         function ($locationProvider, $routeProvider) {
@@ -18,6 +19,8 @@ angular.module('mainPage', [
                 $scope.headshot = 'img/headshot3.jpg';
             } else if(next.includes('resume')) {
                 $scope.headshot = 'img/headshot.jpg';
+            } else if(next.includes('contact')) {
+                $scope.headshot = 'img/headshot2.jpg';
             } else {
                 $scope.headshot = 'img/headshot4.jpg';
             }
