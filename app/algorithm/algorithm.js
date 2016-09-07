@@ -15,7 +15,7 @@ angular.module('mainPage.algorithm', ['ngRoute'])
         $scope.getNumbers = function() {
             var unorderedNumbers = [];
             for (var i = 0; i < $scope.totalNumber; i++) {
-                unorderedNumbers.push(Math.random() * 1000);
+                unorderedNumbers.push(Math.random() * $scope.totalNumber);
             }
             return unorderedNumbers;
         };
@@ -34,47 +34,67 @@ angular.module('mainPage.algorithm', ['ngRoute'])
             return items;
         };
 
-        // $scope.displayBubbleSort = function () {
-        //     var start = window.performance.now();
-        //     bubbleSort(getNumbers());
-        //     var end = window.performance.now();
-        //     return (end - start).toFixed(3);
-        // };
-
         var swap = function(items, firstIndex, secondIndex) {
             var temp = items[firstIndex];
             items[firstIndex] = items[secondIndex];
             items[secondIndex] = temp;
         };
 
-        $scope.quickSort = function (items, left, right) {
-            var pivot = items[Math.floor((right + left) / 2)];
-            var i = left;
-            var j = right;
+        // $scope.quickSort = function (items, left, right) {
+        //     var pivot = items[Math.floor((right + left) / 2)];
+        //     var i = left;
+        //     var j = right;
+        //
+        //     while (i <= j) {
+        //         while (items[i] < pivot) {
+        //             i++;
+        //         }
+        //
+        //         while (items[j] > pivot) {
+        //             j--;
+        //         }
+        //
+        //         if (i <= j) {
+        //             swap(items, i ,j);
+        //             i++;
+        //             j--;
+        //         }
+        //     }
+        //
+        //     return i;
+        // };
 
-            while (i <= j) {
-                while (items[i] < pivot) {
-                    i++;
-                }
+        // function quicksort(data) {
+        //     if (data.length == 0) return [];
+        //
+        //     var left = [], right = [], pivot = data[0];
+        //
+        //     for (var i = 1; i < data.length; i++) {
+        //         if(data[i] < pivot)
+        //             left.push(data[i]);
+        //         else
+        //             right.push(data[i]);
+        //     }
+        //
+        //     return quicksort(left).concat(pivot, quicksort(right));
+        // }
 
-                while (items[j] > pivot) {
-                    j--;
-                }
+        $scope.quickSort = function (a) {
+            if (a.length <= 1) return a;
 
-                if (i <= j) {
-                    swap(items, i ,j);
-                    i++;
-                    j--;
-                }
+            var left = [], right = [], pivot = a[0];
+
+            for (var i = 1; i < a.length; i++) {
+                a[i] < pivot ? left.push(a[i]) : right.push(a[i]);
             }
 
-            return i;
+            return $scope.quickSort(left).concat(pivot, $scope.quickSort(right));
         };
 
         $scope.displaySortSpeed = function (sortMethod) {
             var numbers = $scope.getNumbers().slice(0);
             var start = window.performance.now();
-            sortMethod(numbers, 0, 9999);
+            sortMethod(numbers, 0, numbers.length - 1);
             var end = window.performance.now();
             return (end - start).toFixed(3);
         };

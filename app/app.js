@@ -7,7 +7,8 @@ angular.module('mainPage', [
     'mainPage.resume',
     'mainPage.work',
     'mainPage.contact',
-    'mainPage.algorithm'
+    'mainPage.algorithm',
+    'mainPage.farkle'
 ])
     .config(['$locationProvider', '$routeProvider', 
         function ($locationProvider, $routeProvider) {
