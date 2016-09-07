@@ -20,37 +20,37 @@ angular.module('mainPage.farkle', ['ngRoute'])
             switch (value) {
                 case 1:
                     return {
-                        image: 'dice-one',
+                        image: '../img/dice-one.png',
                         value: 1
                     };
                     break;
                 case 2:
                     return {
-                        image: 'dice-two',
+                        image: '../img/dice-two.png',
                         value: 2
                     };
                     break;
                 case 3:
                     return {
-                        image: 'dice-three',
+                        image: '../img/dice-three.png',
                         value: 3
                     };
                     break;
                 case 4:
                     return {
-                        image: 'dice-four',
+                        image: '../img/dice-four.png',
                         value: 4
                     };
                     break;
                 case 5:
                     return {
-                        image: 'dice-five',
+                        image: '../img/dice-five.png',
                         value: 5
                     };
                     break;
                 case 6:
                     return {
-                        image: 'dice-six',
+                        image: '../img/dice-six.png',
                         value: 6
                     };
                     break;
@@ -76,6 +76,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 // straight
                 // two triples
                 // three doubles
+                
 
                 if ($scope.dice[i].value === 1) {
                     totalValue += 100;
@@ -86,5 +87,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
             $scope.tempScore = totalValue;
             $scope.totalScore += totalValue;
         }
+        
+        
 
     }]);
