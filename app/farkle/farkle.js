@@ -8,8 +8,10 @@ angular.module('mainPage.farkle', ['ngRoute'])
             controller: 'FarkleController'
         });
     }])
-    .controller('FarkleController', ['$scope', function ($scope) {
+    .controller('FarkleController', ['$scope', '$location', function ($scope, $location) {
 
+
+        $scope.imgPrefix = $location.path().includes('kgresmer.github') ? 'img/' : '../img/';
         $scope.tempScore = 0;
         $scope.totalScore = 0;
 
@@ -20,37 +22,37 @@ angular.module('mainPage.farkle', ['ngRoute'])
             switch (value) {
                 case 1:
                     return {
-                        image: '../img/dice-one.png',
+                        image: $scope.imgPrefix + 'dice-one.png',
                         value: 1
                     };
                     break;
                 case 2:
                     return {
-                        image: '../img/dice-two.png',
+                        image: $scope.imgPrefix + 'dice-two.png',
                         value: 2
                     };
                     break;
                 case 3:
                     return {
-                        image: '../img/dice-three.png',
+                        image: $scope.imgPrefix + 'dice-three.png',
                         value: 3
                     };
                     break;
                 case 4:
                     return {
-                        image: '../img/dice-four.png',
+                        image: $scope.imgPrefix + 'dice-four.png',
                         value: 4
                     };
                     break;
                 case 5:
                     return {
-                        image: '../img/dice-five.png',
+                        image: $scope.imgPrefix + 'dice-five.png',
                         value: 5
                     };
                     break;
                 case 6:
                     return {
-                        image: '../img/dice-six.png',
+                        image: $scope.imgPrefix + 'dice-six.png',
                         value: 6
                     };
                     break;
