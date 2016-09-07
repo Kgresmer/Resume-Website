@@ -1,37 +1,37 @@
 <div class="container">
     <div class="">
         <div class="row">
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 dice-face">
-                <img src="img/one-dice.jpg"/>Dice
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                <img class="dice-face" ng-src="../img/{{dice_one}}.png"/>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 dice-face">
-                <img src="img/two-dice.jpg"/>Dice
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                <img class="dice-face" ng-src="../img/{{dice_two}}.png"/>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 dice-face">
-                <img src="img/three-dice.jpg"/>Dice
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                <img class="dice-face" ng-src="../img/{{dice_three}}.png"/>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 dice-face">
-                <img src="img/four-dice.jpg"/>Dice
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                <img class="dice-face" ng-src="../img/{{dice_four}}.png"/>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 dice-face">
-                <img src="img/five-dice.jpg"/>Dice
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                <img class="dice-face" ng-src="../img/{{dice_five}}.png"/>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 dice-face">
-                <img src="img/six-dice.jpg"/>Dice
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                <img class="dice-face" ng-src="../img/{{dice_six}}.png"/>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 dice-face">
-                <img />Roll
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
+                <button class="btn" ng-click="rollDice()">Roll</button>
             </div>
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 dice-face">
-                <img />Scoreboard
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
+                <div>Scoreboard</div>
             </div>
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 dice-face">
-                <img />Score It
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
+                <button class="btn">Score It</button>
             </div>
         </div>
     </div>
