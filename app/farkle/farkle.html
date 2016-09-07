@@ -2,36 +2,38 @@
     <div class="">
         <div class="row">
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <img class="dice-face" ng-src="../img/{{dice_one}}.png"/>
+                <img class="dice-face" ng-src="../img/{{dice[1].image}}.png"/>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <img class="dice-face" ng-src="../img/{{dice_two}}.png"/>
+                <img class="dice-face" ng-src="../img/{{dice[2].image}}.png"/>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <img class="dice-face" ng-src="../img/{{dice_three}}.png"/>
+                <img class="dice-face" ng-src="../img/{{dice[3].image}}.png"/>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <img class="dice-face" ng-src="../img/{{dice_four}}.png"/>
+                <img class="dice-face" ng-src="../img/{{dice[4].image}}.png"/>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <img class="dice-face" ng-src="../img/{{dice_five}}.png"/>
+                <img class="dice-face" ng-src="../img/{{dice[5].image}}.png"/>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <img class="dice-face" ng-src="../img/{{dice_six}}.png"/>
+                <img class="dice-face" ng-src="../img/{{dice[6].image}}.png"/>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
-                <button class="btn" ng-click="rollDice()">Roll</button>
+                <button class="btn roll-btn" ng-click="rollDice()">Roll</button>
             </div>
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
-                <div>Scoreboard</div>
+                <p>Scoreboard</p>
+                <p>{{tempScore}}</p>
+                <p>{{totalScore}}</p>
             </div>
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
-                <button class="btn">Score It</button>
+                <button class="btn score-btn">Score It</button>
             </div>
         </div>
     </div>
