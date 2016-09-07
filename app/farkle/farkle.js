@@ -11,7 +11,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
     .controller('FarkleController', ['$scope', '$location', function ($scope, $location) {
 
 
-        $scope.imgPrefix = $location.path().includes('kgresmer.github') ? 'app/img/' : '../img/';
+        $scope.imgPrefix = $location.absUrl().includes('kgresmer.github') ? 'app/img/' : '../img/';
         $scope.tempScore = 0;
         $scope.totalScore = 0;
 
