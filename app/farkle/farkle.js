@@ -48,6 +48,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
         };
         
         $scope.rollDice = function() {
+            $scope.farkle = false;
             $scope.tempScore = 0;
             $scope.displayDice = [];
             for (var i = 1; i < 7; i++) {
@@ -89,7 +90,9 @@ angular.module('mainPage.farkle', ['ngRoute'])
                     checkForMultiples(allDice[j]);
                 }
             }
-
+            if ($scope.tempScore === 0) {
+                $scope.farkle = true;
+            }
             $scope.totalScore += $scope.tempScore;
         };
 
