@@ -59,7 +59,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
         $scope.getDiceValue = function() {
 
             var ones = [], twos = [], threes = [], fours = [], fives = [], sixes = [];
-            var allDice = [ones, twos, threes, fours, fives, sixes];
+
             //Store the values in separate arrays to search for patterns
             for (var i = 1; i < 7; i++) {
                 switch ($scope.dice[i].value) {
@@ -82,9 +82,12 @@ angular.module('mainPage.farkle', ['ngRoute'])
                         sixes.push($scope.dice[i].value);
                 }
             }
+            var allDice = [ones, twos, threes, fours, fives, sixes];
             //Check for patterns
-            for (var j = 1; j < 7; j++) {
-                checkForMultiples(allDice[j]);
+            for (var j = 0; j < 6; j++) {
+                if (allDice[j].length !== 0) {
+                    checkForMultiples(allDice[j]);
+                }
             }
 
             $scope.totalScore += $scope.tempScore;
@@ -93,26 +96,32 @@ angular.module('mainPage.farkle', ['ngRoute'])
         //Search for common values
         var checkForMultiples = function(array) {
             if (array.length === 6) {
-                $scope.tempScore = array[0] * 600;
+                $scope.tempScore = array[0] * 400;
                 addToDisplay(array[0], 6);
             } else if (array.length === 5) {
-                $scope.tempScore += array[0] * 500;
+                $scope.tempScore += array[0] * 300;
                 addToDisplay(array[0], 5);
             } else if (array.length === 4) {
-                $scope.tempScore += array[0] * 400;
+                $scope.tempScore += array[0] * 200;
                 addToDisplay(array[0], 4);
             } else if (array.length === 3) {
                 if (array[0] === 1) {
                     $scope.tempScore += 1000;
                 } else {
-                    $scope.tempScore += array[0] * 300;
+                    $scope.tempScore += array[0] * 100;
                 }
                 addToDisplay(array[0], 3);
             } else if (array.length === 2) {
                 addToDisplay(array[0], 2);
-                //check for 3 pairs
+                //TODO check for 3 pairs
                 //else add ones and fives
+                if (array[0] === 1) {
+                    $scope.tempScore += 200;
+                } else if (array[0] === 5) {
+                    $scope.tempScore += 100;
+                }
             } else if (array.length === 1) {
+                //TODO check for straight
                 addToDisplay(array[0], 1);
                 if (array[0] === 1) {
                     $scope.tempScore += 100;
