@@ -147,9 +147,10 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 $scope.tempScore += 1500;
             } else {
                 for (var i = 0; i < pairArrays.length; i++) {
-                    if (array[0] === 1) {
+                    var current = pairArrays[i];
+                    if (current[0] === 1) {
                         $scope.tempScore += 200;
-                    } else if (array[0] === 5) {
+                    } else if (current[0] === 5) {
                         $scope.tempScore += 100;
                     }
                 }
