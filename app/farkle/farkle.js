@@ -183,6 +183,10 @@ angular.module('mainPage.farkle', ['ngRoute'])
                         $scope.displayDice.push(SIX);
                 }
             }
-        }
+        };
 
+        $scope.scoreDice = function (die) {
+
+        };
+        
     }]);
