@@ -114,6 +114,10 @@ angular.module('mainPage.farkle', ['ngRoute'])
             var pairArrays = [];
             for (var j = 0; j < 6; j++) {
                 var currentNumberArray = allDiceArrays[j];
+                if (currentNumberArray.length === 0) {
+                    continue;
+                }
+
                 if (currentNumberArray.length === 6) {
                     $scope.tempScore = currentNumberArray[0] * 400;
                     addToDisplay(currentNumberArray[0], 6);
