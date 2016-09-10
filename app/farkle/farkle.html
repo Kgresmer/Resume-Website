@@ -1,23 +1,13 @@
 <div class="container">
     <div class="">
         <div class="row">
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <a href="" ng-click="scoreDice(displayDice[0])"><img class="dice-face" ng-src="{{displayDice[0].image}}"/></a>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12" ng-repeat="dice in displayDice track by $index">
+                <a href="" ng-click="scoreDice(dice)"><img class="dice-face" ng-src="{{dice.image}}"/></a>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <a href="" ng-click="scoreDice(displayDice[1])"><img class="dice-face" ng-src="{{displayDice[1].image}}"/></a>
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <a href="" ng-click="scoreDice(displayDice[2])"><img class="dice-face" ng-src="{{displayDice[2].image}}"/></a>
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <a href="" ng-click="scoreDice(displayDice[3])"><img class="dice-face" ng-src="{{displayDice[3].image}}"/></a>
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <a href="" ng-click="scoreDice(displayDice[4])"><img class="dice-face" ng-src="{{displayDice[4].image}}"/></a>
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-                <a href="" ng-click="scoreDice(displayDice[5])"><img class="dice-face" ng-src="{{displayDice[5].image}}"/></a>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12" ng-repeat="selectedDie in selectedDice track by $index">
+                <img class="dice-face" ng-src="{{selectedDie.image}}"/></a>
             </div>
         </div>
         <div class="row">

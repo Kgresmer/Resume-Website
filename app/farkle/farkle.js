@@ -13,7 +13,8 @@ angular.module('mainPage.farkle', ['ngRoute'])
 
         $scope.imgPrefix = $location.absUrl().includes('kgresmer.github') ? 'img/' : '../img/';
         $scope.totalScore = 0;
-        $scope.dice = [];
+        $scope.rolledDice = [];
+        $scope.selectedDice = [];
         const ONE = {image: $scope.imgPrefix + 'dice-one.png', value: 1},
             TWO = {image: $scope.imgPrefix + 'dice-two.png', value: 2},
             THREE = {image: $scope.imgPrefix + 'dice-three.png', value: 3},
@@ -51,41 +52,15 @@ angular.module('mainPage.farkle', ['ngRoute'])
             $scope.tempScore = 0;
             $scope.displayDice = [];
             for (var i = 1; i < 7; i++) {
-                $scope.dice[i] = getDiceValue();
+                $scope.rolledDice[i] = getDiceValue();
             }
-            getTotalDiceValue();
+            var diceWithNumbers = giveDiceValue();
+            addValueOfDice(diceWithNumbers);
         };
 
-        var getTotalDiceValue = function () {
-
-            var ones = [], twos = [], threes = [], fours = [], fives = [], sixes = [];
-
-            //Store the values in separate arrays to search for patterns
-            for (var i = 1; i < 7; i++) {
-                switch ($scope.dice[i].value) {
-                    case 1:
-                        ones.push($scope.dice[i].value);
-                        continue;
-                    case 2:
-                        twos.push($scope.dice[i].value);
-                        continue;
-                    case 3:
-                        threes.push($scope.dice[i].value);
-                        continue;
-                    case 4:
-                        fours.push($scope.dice[i].value);
-                        continue;
-                    case 5:
-                        fives.push($scope.dice[i].value);
-                        continue;
-                    case 6:
-                        sixes.push($scope.dice[i].value);
-                }
-            }
-            var allDice = [ones, twos, threes, fours, fives, sixes];
-            //Check for patterns
+        function addValueOfDice(allDice) {
             if (checkForStraight(allDice)) {
-                
+
             } else {
                 checkForMultiples(allDice);
                 if ($scope.tempScore === 0) {
@@ -93,9 +68,38 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 }
                 $scope.totalScore += $scope.tempScore;
             }
-        };
+        }
 
-        var checkForStraight = function (arrays) {
+        function giveDiceValue() {
+            var ones = [], twos = [], threes = [], fours = [], fives = [], sixes = [];
+
+            //Store the values in separate arrays to search for patterns
+            for (var i = 1; i < $scope.rolledDice.length; i++) {
+                switch ($scope.rolledDice[i].value) {
+                    case 1:
+                        ones.push($scope.rolledDice[i].value);
+                        continue;
+                    case 2:
+                        twos.push($scope.rolledDice[i].value);
+                        continue;
+                    case 3:
+                        threes.push($scope.rolledDice[i].value);
+                        continue;
+                    case 4:
+                        fours.push($scope.rolledDice[i].value);
+                        continue;
+                    case 5:
+                        fives.push($scope.rolledDice[i].value);
+                        continue;
+                    case 6:
+                        sixes.push($scope.rolledDice[i].value);
+                }
+            }
+
+            return [ones, twos, threes, fours, fives, sixes];
+        }
+
+        function checkForStraight(arrays) {
             if (arrays[0].length === 1 && arrays[1].length === 1 && arrays[2].length === 1
                 && arrays[3].length === 1 && arrays[4].length === 1 && arrays[5].length === 1) {
                 $scope.tempScore += 1500;
@@ -106,10 +110,10 @@ angular.module('mainPage.farkle', ['ngRoute'])
             } else {
                 return false;
             }
-        };
+        }
 
         //Search for common values
-        var checkForMultiples = function (allDiceArrays) {
+        function checkForMultiples(allDiceArrays) {
             var numberOfPairs = 0;
             var pairArrays = [];
             for (var j = 0; j < 6; j++) {
@@ -159,9 +163,9 @@ angular.module('mainPage.farkle', ['ngRoute'])
                     }
                 }
             }
-        };
+        }
 
-        var addToDisplay = function (value, count) {
+        function addToDisplay(value, count) {
             for (var i = 0; i < count; i++) {
                 switch (value) {
                     case 1:
@@ -183,10 +187,12 @@ angular.module('mainPage.farkle', ['ngRoute'])
                         $scope.displayDice.push(SIX);
                 }
             }
-        };
+        }
 
         $scope.scoreDice = function (die) {
-
+            $scope.displayDice.pop(dice);
+            $scope.selectedDice.push(dice);
+            addValueOfDice(allDice);
         };
-        
+
     }]);
