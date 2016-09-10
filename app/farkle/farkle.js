@@ -15,6 +15,8 @@ angular.module('mainPage.farkle', ['ngRoute'])
         $scope.totalScore = 0;
         $scope.rolledDice = [];
         $scope.selectedDice = [];
+        $scope.emptyDisplayArray = [{},{},{},{},{},{}];
+        $scope.totalDiceAvailableToRoll = 6;
         const ONE = {image: $scope.imgPrefix + 'dice-one.png', value: 1},
             TWO = {image: $scope.imgPrefix + 'dice-two.png', value: 2},
             THREE = {image: $scope.imgPrefix + 'dice-three.png', value: 3},
@@ -50,49 +52,55 @@ angular.module('mainPage.farkle', ['ngRoute'])
             $scope.farkle = false;
             $scope.straight = false;
             $scope.tempScore = 0;
+            $scope.rollScore = 0;
             $scope.displayDice = [];
-            for (var i = 1; i < 7; i++) {
+            $scope.rolledDice = [];
+            for (var i = 0; i < $scope.totalDiceAvailableToRoll; i++) {
                 $scope.rolledDice[i] = getDiceValue();
             }
-            var diceWithNumbers = giveDiceValue();
-            addValueOfDice(diceWithNumbers);
+            var diceWithNumbers = giveDiceValue($scope.rolledDice);
+            $scope.tempScore = addUpValueOfDice(diceWithNumbers, true);
         };
 
-        function addValueOfDice(allDice) {
-            if (checkForStraight(allDice)) {
-
+        function addUpValueOfDice(allDice, buildUpDisplay) {
+            var addedValue = 0;
+            if ($scope.totalDiceAvailableToRoll === 6 && checkForStraight(allDice)) {
+                return 1500;
             } else {
-                checkForMultiples(allDice);
-                if ($scope.tempScore === 0) {
+                addedValue += checkForMultiples(allDice, buildUpDisplay);
+                if (addedValue === 0) {
                     $scope.farkle = true;
+                    return 0;
                 }
-                $scope.totalScore += $scope.tempScore;
+                return addedValue;
             }
         }
 
-        function giveDiceValue() {
+        function giveDiceValue(arrayOfDiceObjects) {
             var ones = [], twos = [], threes = [], fours = [], fives = [], sixes = [];
 
             //Store the values in separate arrays to search for patterns
-            for (var i = 1; i < $scope.rolledDice.length; i++) {
-                switch ($scope.rolledDice[i].value) {
-                    case 1:
-                        ones.push($scope.rolledDice[i].value);
-                        continue;
-                    case 2:
-                        twos.push($scope.rolledDice[i].value);
-                        continue;
-                    case 3:
-                        threes.push($scope.rolledDice[i].value);
-                        continue;
-                    case 4:
-                        fours.push($scope.rolledDice[i].value);
-                        continue;
-                    case 5:
-                        fives.push($scope.rolledDice[i].value);
-                        continue;
-                    case 6:
-                        sixes.push($scope.rolledDice[i].value);
+            for (var i = 0; i < arrayOfDiceObjects.length; i++) {
+                if (arrayOfDiceObjects[i]) {
+                    switch (arrayOfDiceObjects[i].value) {
+                        case 1:
+                            ones.push(arrayOfDiceObjects[i]);
+                            continue;
+                        case 2:
+                            twos.push(arrayOfDiceObjects[i]);
+                            continue;
+                        case 3:
+                            threes.push(arrayOfDiceObjects[i]);
+                            continue;
+                        case 4:
+                            fours.push(arrayOfDiceObjects[i]);
+                            continue;
+                        case 5:
+                            fives.push(arrayOfDiceObjects[i]);
+                            continue;
+                        case 6:
+                            sixes.push(arrayOfDiceObjects[i]);
+                    }
                 }
             }
 
@@ -103,9 +111,10 @@ angular.module('mainPage.farkle', ['ngRoute'])
             if (arrays[0].length === 1 && arrays[1].length === 1 && arrays[2].length === 1
                 && arrays[3].length === 1 && arrays[4].length === 1 && arrays[5].length === 1) {
                 $scope.tempScore += 1500;
+                $scope.rollScore += 1500;
                 $scope.straight = true;
                 $scope.displayDice = [ONE, TWO, THREE, FOUR, FIVE, SIX];
-                $scope.totalScore += $scope.tempScore;
+                $scope.totalScore += $scope.rollScore;
                 return true;
             } else {
                 return false;
@@ -113,56 +122,62 @@ angular.module('mainPage.farkle', ['ngRoute'])
         }
 
         //Search for common values
-        function checkForMultiples(allDiceArrays) {
+        function checkForMultiples(allDiceArrays, buildUpDisplay) {
             var numberOfPairs = 0;
             var pairArrays = [];
-            for (var j = 0; j < 6; j++) {
+            var addedValue = 0;
+            if (allDiceArrays && allDiceArrays.length === 0) {
+                return;
+            }
+
+            for (var j = 0; j < allDiceArrays.length; j++) {
                 var currentNumberArray = allDiceArrays[j];
                 if (currentNumberArray.length === 0) {
                     continue;
                 }
 
                 if (currentNumberArray.length === 6) {
-                    $scope.tempScore = currentNumberArray[0] * 400;
-                    addToDisplay(currentNumberArray[0], 6);
+                    addedValue = currentNumberArray[0].value * 400;
+                    buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 6) : '';
                 } else if (currentNumberArray.length === 5) {
-                    $scope.tempScore += currentNumberArray[0] * 300;
-                    addToDisplay(currentNumberArray[0], 5);
+                    addedValue += currentNumberArray[0].value * 300;
+                    buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 5) : '';
                 } else if (currentNumberArray.length === 4) {
-                    $scope.tempScore += currentNumberArray[0] * 200;
-                    addToDisplay(currentNumberArray[0], 4);
+                    addedValue += currentNumberArray[0].value * 200;
+                    buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 4) : '';
                 } else if (currentNumberArray.length === 3) {
-                    if (currentNumberArray[0] === 1) {
-                        $scope.tempScore += 1000;
+                    if (currentNumberArray[0].value === 1) {
+                        addedValue += 1000;
                     } else {
-                        $scope.tempScore += currentNumberArray[0] * 100;
+                        addedValue += currentNumberArray[0].value * 100;
                     }
-                    addToDisplay(currentNumberArray[0], 3);
+                    buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 3) : '';
                 } else if (currentNumberArray.length === 2) {
                     numberOfPairs += 1;
-                    addToDisplay(currentNumberArray[0], 2);
+                    buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 2) : '';
                     pairArrays.push(currentNumberArray);
                 } else if (currentNumberArray.length === 1) {
-                    addToDisplay(currentNumberArray[0], 1);
-                    if (currentNumberArray[0] === 1) {
-                        $scope.tempScore += 100;
-                    } else if (currentNumberArray[0] === 5) {
-                        $scope.tempScore += 50;
+                    buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 1) : '';
+                    if (currentNumberArray[0].value === 1) {
+                        addedValue += 100;
+                    } else if (currentNumberArray[0].value === 5) {
+                        addedValue += 50;
                     }
                 }
             }
             if (numberOfPairs === 3) {
-                $scope.tempScore += 1500;
+                addedValue += 1500;
             } else {
                 for (var i = 0; i < pairArrays.length; i++) {
                     var current = pairArrays[i];
-                    if (current[0] === 1) {
-                        $scope.tempScore += 200;
-                    } else if (current[0] === 5) {
-                        $scope.tempScore += 100;
+                    if (current[0].value === 1) {
+                        addedValue += 200;
+                    } else if (current[0].value === 5) {
+                        addedValue += 100;
                     }
                 }
             }
+            return addedValue;
         }
 
         function addToDisplay(value, count) {
@@ -189,10 +204,25 @@ angular.module('mainPage.farkle', ['ngRoute'])
             }
         }
 
-        $scope.scoreDice = function (die) {
-            $scope.displayDice.pop(dice);
-            $scope.selectedDice.push(dice);
-            addValueOfDice(allDice);
+        $scope.selectDice = function (dieObject, index) {
+            $scope.displayDice.splice(index, 1);
+            $scope.totalDiceAvailableToRoll--;
+            if ($scope.selectedDice.length < 6) {
+                $scope.selectedDice.push(dieObject);
+                var selectedDiceInNumberedArrays = giveDiceValue($scope.selectedDice);
+                $scope.rollScore = addUpValueOfDice(selectedDiceInNumberedArrays, false);
+            }
         };
+
+        $scope.deselectDice = function (dieObject, index) {
+            $scope.displayDice.push(dieObject);
+            $scope.totalDiceAvailableToRoll++;
+            $scope.selectedDice.splice(index, 1);
+            $scope.rollScore -= dieObject.value;
+        };
+
+        $scope.addUpScoreOfSelectedDice = function () {
+            $scope.totalScore += $scope.rollScore;
+        }
 
     }]);
