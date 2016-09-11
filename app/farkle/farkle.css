@@ -12,3 +12,7 @@
 .roll-btn {
     color: black;
 }
+
+.rolled-dice-row {
+    padding: 1rem;
+}

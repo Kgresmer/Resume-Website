@@ -1,35 +1,41 @@
 <div class="container">
     <div class="">
-        <div class="row">
-            <div ng-if="displayDice.length === 0" class="col-lg-1 col-md-1 col-sm-1 col-xs-12" ng-repeat="i in emptyDisplayArray">
-                <img class="dice-face" />
+        <div class="row rolled-dice-row">
+            <div ng-if="!displayDice || displayDice.length === 0" class="col-lg-1 col-md-1 col-sm-1 col-xs-12"
+                 ng-repeat="i in emptyDisplayArray">
+                <img class="dice-face"/>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12" ng-repeat="dice in displayDice track by $index">
-                <a href="" ng-click="selectDice(displayDice[$index], $index)"><img class="dice-face" ng-src="{{dice.image}}"/></a>
+                <a href="" ng-click="selectDice(displayDice[$index], $index)">
+                    <img class="dice-face" ng-src="{{dice.image}}"/>
+                </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12" ng-repeat="selectedDie in selectedDice track by $index">
-                <a href="" ng-click="deselectDice(selectedDice[$index], $index)"><img class="dice-face" ng-src="{{selectedDie.image}}"/></a>
+        <div class="row rolled-dice-row">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"
+                 ng-repeat="selectedDie in selectedDice track by $index">
+                <a href="" ng-click="deselectDice(selectedDice[$index], $index)">
+                    <img class="dice-face" ng-src="{{selectedDie.image}}"/>
+                </a>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
-                <button class="btn roll-btn" ng-click="rollDice()">Roll</button>
+                <button class="btn roll-btn" ng-disabled="rollScore === 0" ng-click="rollDice()">Roll</button>
             </div>
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
-                <p ng-if="farkle">You Farkled!</p>
-                <p ng-if="straight">You rolled a straight!</p>
-                <p>Scoreboard</p>
-                <p>Chosen Score: {{rollScore}}</p>
-                <p>Highest Potential Score: {{tempScore}}</p>
+                <h2 ng-if="farkle">You Farkled!</h2>
+                <h3>Scoreboard</h3>
+                <p>Round Score: {{roundScore}}</p>
                 <p>Total Score: {{totalScore}}</p>
             </div>
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
-                <button class="btn score-btn" ng-click="addUpScoreOfSelectedDice()">Score It</button>
+                <button class="btn score-btn" ng-disabled="selectedDice.length === 0"
+                        ng-click="addUpScoreOfSelectedDice()">Score It
+                </button>
             </div>
         </div>
     </div>
