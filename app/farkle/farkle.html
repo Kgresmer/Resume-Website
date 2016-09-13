@@ -12,6 +12,10 @@
             </div>
         </div>
         <div class="row rolled-dice-row">
+            <div  ng-if="!selectedDice || selectedDice.length === 0" class="col-lg-1 col-md-1 col-sm-1 col-xs-12"
+                  ng-repeat="i in emptyDisplayArray">
+                <img class="dice-face"/>
+            </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"
                  ng-repeat="selectedDie in selectedDice track by $index">
                 <a href="" ng-click="deselectDice(selectedDice[$index], $index)">
