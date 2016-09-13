@@ -61,9 +61,9 @@ angular.module('mainPage.farkle', ['ngRoute'])
             $scope.farkle = false;
             $scope.displayDice = [];
             $scope.rolledDice = [];
-            $scope.selectedDice = [];
             if ($scope.totalDiceAvailableToRoll === 0 && $scope.roundScore !== 0) {
                 $scope.totalDiceAvailableToRoll = 6;
+                $scope.selectedDice = [];
             }
             for (var i = 0; i < $scope.totalDiceAvailableToRoll; i++) {
                 $scope.rolledDice[i] = getDiceValue();
