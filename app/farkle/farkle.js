@@ -13,6 +13,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
 
         $scope.imgPrefix = $location.absUrl().includes('kgresmer.github') ? 'img/' : '../img/';
         $scope.totalScore = 0;
+        $scope.turnScore = 0;
         $scope.rolledDice = [];
         $scope.selectedDice = [];
         $scope.roundScore = 0;
@@ -60,9 +61,9 @@ angular.module('mainPage.farkle', ['ngRoute'])
             $scope.farkle = false;
             $scope.displayDice = [];
             $scope.rolledDice = [];
+            $scope.selectedDice = [];
             if ($scope.totalDiceAvailableToRoll === 0 && $scope.roundScore !== 0) {
                 $scope.totalDiceAvailableToRoll = 6;
-                $scope.selectedDice = [];
             }
             for (var i = 0; i < $scope.totalDiceAvailableToRoll; i++) {
                 $scope.rolledDice[i] = getDiceValue();
@@ -126,7 +127,6 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 $scope.straight = true;
                 $scope.displayDice = [ONE_SELECTABLE, TWO_SELECTABLE, THREE_SELECTABLE,
                     FOUR_SELECTABLE, FIVE_SELECTABLE, SIX_SELECTABLE];
-                $scope.totalScore += $scope.roundScore;
                 return true;
             } else {
                 return false;
@@ -255,7 +255,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 $scope.displayDice.splice(index, 1);
                 $scope.totalDiceAvailableToRoll--;
                 $scope.selectedDice.push(dieObject);
-                var selectedDiceInNumberedArrays = giveDiceValue($scope.selectedDice);
+                var selectedDiceInNumberedArrays = giveDiceValue(dieObject);
                 $scope.roundScore += addUpValueOfDice(selectedDiceInNumberedArrays, false);
             }
         };
@@ -277,6 +277,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
 
         function nextRound() {
             $scope.roundScore = 0;
+            $scope.turnScore = 0;
             $scope.selectedDice = [];
             $scope.displayDice = [];
             $scope.totalDiceAvailableToRoll = 6;
@@ -294,9 +295,9 @@ angular.module('mainPage.farkle', ['ngRoute'])
                     $scope.displayDice.splice($scope.displayDice.indexOf(group[j]), 1);
                     $scope.totalDiceAvailableToRoll--;
                     $scope.selectedDice.push(group[j]);
-                    var selectedDiceInNumberedArrays = giveDiceValue($scope.selectedDice);
-                    $scope.roundScore = addUpValueOfDice(selectedDiceInNumberedArrays, false);
                 }
+                var selectedDiceInNumberedArrays = giveDiceValue(group);
+                $scope.roundScore += addUpValueOfDice(selectedDiceInNumberedArrays, false);
                 return true;
             } else {
                 return false;
@@ -316,9 +317,9 @@ angular.module('mainPage.farkle', ['ngRoute'])
                     $scope.displayDice[$scope.displayDice.indexOf(group[j])].selectable = true;
                     $scope.totalDiceAvailableToRoll++;
                     $scope.selectedDice.splice($scope.selectedDice.indexOf(group[j]), 1);
-                    var selectedDiceInNumberedArrays = giveDiceValue($scope.selectedDice);
-                    $scope.roundScore = addUpValueOfDice(selectedDiceInNumberedArrays, false);
                 }
+                var selectedDiceInNumberedArrays = giveDiceValue(group);
+                $scope.roundScore -= addUpValueOfDice(selectedDiceInNumberedArrays, false);
                 return true;
             } else {
                 return false;
