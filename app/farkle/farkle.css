@@ -4,6 +4,11 @@
     width: 50px;
 }
 
+.blank-dice-face {
+    height: 55px;
+    width: 55px;
+}
+
 .dice-container {
     height: 60px;
     width: 60px;

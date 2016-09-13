@@ -8,7 +8,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
             controller: 'FarkleController'
         });
     }])
-    .controller('FarkleController', ['$scope', '$location', function ($scope, $location) {
+    .controller('FarkleController', ['$scope', '$location', '$timeout', function ($scope, $location, $timeout) {
 
 
         $scope.imgPrefix = $location.absUrl().includes('kgresmer.github') ? 'img/' : '../img/';
@@ -72,7 +72,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
             var potentialValue = addUpValueOfDice(diceWithNumbers, true);
             if (potentialValue === 0) {
                 $scope.farkle = true;
-                nextRound();
+                $timeout(function() { nextRound() }, 1500);
             }
 
         };
