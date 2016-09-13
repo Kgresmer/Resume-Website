@@ -1,8 +1,12 @@
 .dice-face {
     border: 1px solid white;
-    margin: 1rem;
     height: 50px;
     width: 50px;
+}
+
+.dice-container {
+    height: 60px;
+    width: 60px;
 }
 
 .score-btn {
@@ -15,4 +19,27 @@
 
 .rolled-dice-row {
     padding: 1rem;
+    margin: 1rem;
+}
+
+.scoreboard {
+    margin-top: 2rem;
+}
+
+.selectable {
+    border: 1px solid deepskyblue;
+}
+
+.not-selectable {
+    pointer-events: none;
+    cursor: default;
+}
+
+img.dice-face {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
