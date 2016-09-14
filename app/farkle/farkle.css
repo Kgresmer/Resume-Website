@@ -5,6 +5,7 @@
 }
 
 .blank-dice-face {
+    border: none;
     height: 55px;
     width: 55px;
 }
@@ -29,6 +30,7 @@
 
 .scoreboard {
     margin-top: 2rem;
+    border-top: 4px solid white;
 }
 
 .selectable {
