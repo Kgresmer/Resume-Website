@@ -1,22 +1,23 @@
 <div class="container">
     <div class="">
         <div class="row rolled-dice-row">
-            <div  ng-if="!displayDice || displayDice.length === 0" class="col-lg-1 col-md-1 col-sm-1 col-xs-1"
+            <div ng-if="!displayDice || displayDice.length === 0" class="col-lg-1 col-md-1 col-sm-1 col-xs-1"
                  ng-repeat="i in emptyDisplayArray">
-                <img class="blank-dice-face"/>
+                <div class="blank-dice-face"></div>
             </div>
-            <div  class="col-lg-1 col-md-1 col-sm-1 col-xs-1 dice-container" ng-repeat="dice in displayDice track by $index">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 dice-container"
+                 ng-repeat="dice in displayDice track by $index">
                 <a href="" ng-click="selectDice(displayDice[$index], $index)">
                     <img ng-class="appliedClass(dice)" class="dice-face" ng-src="{{dice.image}}"/>
                 </a>
             </div>
         </div>
         <div class="row rolled-dice-row">
-            <div  ng-if="!selectedDice || selectedDice.length === 0" class="col-lg-1 col-md-1 col-sm-1 col-xs-1"
-                  ng-repeat="i in emptyDisplayArray">
-                <img class="blank-dice-face"/>
+            <div ng-if="!selectedDice || selectedDice.length === 0" class="col-lg-1 col-md-1 col-sm-1 col-xs-1"
+                 ng-repeat="i in emptyDisplayArray">
+                <div class="blank-dice-face"></div>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 dice-container"
                  ng-repeat="selectedDie in selectedDice track by $index">
                 <a href="" ng-click="deselectDice(selectedDice[$index], $index)">
                     <img class="dice-face" ng-src="{{selectedDie.image}}"/>
@@ -43,19 +44,32 @@
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
-                <button class="btn" ng-click="newGame()">New Game</button>
+                <button class="btn score-btn" ng-click="newGame()">New Game</button>
             </div>
+            <div class="col-xs-offset-2 col-sm-offset-2"></div>
+
+        </div>
+        <div class="row">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
                 <h4>Players</h4>
                 <ul>
                     <li ng-repeat="player in players">{{player.name}}</li>
+                    <button class="btn score-btn" ng-click="removePlayer(player)">X</button>
                 </ul>
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
-                <button class="btn" ng-click="newGame()">Add Player</button>
-                 <!-- TODO add player directive -->
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="input-group">
+                    <input type="text" class="" placeholder="player name" ng-model="playerName">
+        <span class="input-group-btn">
+            <button class="btn score-btn" ng-click="addPlayer()">Add Player</button>
+        </span>
+                </div>
             </div>
         </div>
+
+
     </div>
 </div>
 

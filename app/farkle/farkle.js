@@ -17,6 +17,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
         $scope.rolledDice = [];
         $scope.selectedDice = [];
         $scope.roundScore = 0;
+        $scope.players = [];
         $scope.emptyDisplayArray = [{}, {}, {}, {}, {}, {}];
         $scope.totalDiceAvailableToRoll = 6;
         const ONE = {image: $scope.imgPrefix + 'dice-one.png', value: 1, selectable: false},
@@ -332,6 +333,24 @@ angular.module('mainPage.farkle', ['ngRoute'])
             } else {
                 return "not-selectable";
             }
+        };
+
+        $scope.players = [];
+
+        function addPlayer() {
+            var player = {
+                name: $scope.player,
+                score: 0
+            };
+            $scope.players.push(player)
         }
 
+        function removePlayer(player) {
+            $scope.players.pop(player);
+        }
+
+        return {
+            restrict: 'E',
+            templateUrl: 'add_player.html'
+        }
     }]);
