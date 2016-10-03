@@ -34,7 +34,6 @@
                 <h2 ng-if="farkle">You Farkled!</h2>
                 <h3>Scoreboard</h3>
                 <p>Round Score: {{roundScore}}</p>
-                <p>Total Score: {{totalScore}}</p>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
                 <button class="btn score-btn" ng-disabled="selectedDice.length === 0 || farkle"
@@ -50,22 +49,24 @@
 
         </div>
         <div class="row">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <h4>Players</h4>
-                <ul>
-                    <li ng-repeat="player in players">{{player.name}}</li>
-                    <button class="btn score-btn" ng-click="removePlayer(player)">X</button>
-                </ul>
+                <div ng-repeat="player in players">
+                    <div style="display: inline">
+                        {{player.name}} - {{player.score}}
+                        <button class="score-btn inline" ng-click="removePlayer(player)">X</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="input-group">
                     <input type="text" class="" placeholder="player name" ng-model="playerName">
-        <span class="input-group-btn">
-            <button class="btn score-btn" ng-click="addPlayer()">Add Player</button>
-        </span>
                 </div>
+                <span class="input-group-btn">
+                    <button class="btn score-btn" ng-click="addPlayer(playerName)">Add Player</button>
+                </span>
             </div>
         </div>
 

@@ -17,6 +17,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
         $scope.rolledDice = [];
         $scope.selectedDice = [];
         $scope.roundScore = 0;
+        $scope.currentPlayerIndex = 0;
         $scope.players = [];
         $scope.emptyDisplayArray = [{}, {}, {}, {}, {}, {}];
         $scope.totalDiceAvailableToRoll = 6;
@@ -272,7 +273,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
         };
 
         $scope.addUpScoreOfSelectedDice = function () {
-            $scope.totalScore += $scope.roundScore;
+            $scope.players[$scope.currentPlayerIndex].score += $scope.roundScore;
             nextRound();
         };
 
@@ -282,6 +283,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
             $scope.selectedDice = [];
             $scope.displayDice = [];
             $scope.totalDiceAvailableToRoll = 6;
+            switchPlayers();
         }
 
         function searchForGroupsToSelect(die) {
@@ -335,22 +337,26 @@ angular.module('mainPage.farkle', ['ngRoute'])
             }
         };
 
-        $scope.players = [];
+        $scope.players = [{name: 'Kevin', score: 0}];
 
-        function addPlayer() {
+        $scope.addPlayer = function(playerName) {
             var player = {
-                name: $scope.player,
+                name: playerName,
                 score: 0
             };
             $scope.players.push(player)
-        }
+        };
 
-        function removePlayer(player) {
+        $scope.removePlayer = function(player) {
             $scope.players.pop(player);
+        };
+
+        function switchPlayers() {
+            if ($scope.players[$scope.currentPlayerIndex + 1]) {
+                $scope.currentPlayerIndex++;
+            } else {
+                $scope.currentPlayerIndex = 0;
+            }
         }
 
-        return {
-            restrict: 'E',
-            templateUrl: 'add_player.html'
-        }
     }]);

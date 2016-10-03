@@ -15,6 +15,11 @@
     width: 60px;
 }
 
+.active-player {
+    color: #00b3ee;
+    background-color: #c7ddef;
+}
+
 .score-btn {
     color: black;
 }
