@@ -19,7 +19,7 @@
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 dice-container"
                  ng-repeat="selectedDie in selectedDice track by $index">
-                <a href="" ng-click="deselectDice(selectedDice[$index], $index)">
+                <a href="" ng-class="{ disabled: selectedDie.selectable }" ng-click="deselectDice(selectedDice[$index], $index)">
                     <img class="dice-face" ng-src="{{selectedDie.image}}"/>
                 </a>
             </div>
@@ -27,7 +27,8 @@
         <div class="row scoreboard">
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1"></div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
-                <button class="btn roll-btn" ng-disabled="" ng-click="rollDice()">Roll</button>
+                <button class="btn roll-btn" ng-disabled="disableRollButton"
+                        ng-click="rollDice()">Roll</button>
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
@@ -51,10 +52,11 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <h4>Players</h4>
+                <h5>{{alertMessage}}</h5>
                 <div ng-repeat="player in players">
-                    <div style="display: inline">
+                    <div style="display: inline" ng-class="{ 'active-player': player.active }">
                         {{player.name}} - {{player.score}}
-                        <button class="score-btn inline" ng-click="removePlayer(player)">X</button>
+                        <button class="score-btn inline" ng-hide="gameHasBegun" ng-click="removePlayer(player)">X</button>
                     </div>
                 </div>
             </div>
@@ -62,10 +64,10 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="input-group">
-                    <input type="text" class="" placeholder="player name" ng-model="playerName">
+                    <input ng-hide="gameHasBegun" type="text" class="" id="playerName" placeholder="player name" ng-model="playerName">
                 </div>
                 <span class="input-group-btn">
-                    <button class="btn score-btn" ng-click="addPlayer(playerName)">Add Player</button>
+                    <button class="btn score-btn" ng-hide="gameHasBegun" ng-click="addPlayer(playerName)">Add Player</button>
                 </span>
             </div>
         </div>

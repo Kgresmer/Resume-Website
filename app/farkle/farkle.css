@@ -17,7 +17,12 @@
 
 .active-player {
     color: #00b3ee;
-    background-color: #c7ddef;
+    background-color: black;
+}
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .score-btn {

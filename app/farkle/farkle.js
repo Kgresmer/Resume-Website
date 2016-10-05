@@ -13,13 +13,13 @@ angular.module('mainPage.farkle', ['ngRoute'])
 
         $scope.imgPrefix = $location.absUrl().includes('kgresmer.github') ? 'img/' : '../img/';
         $scope.totalScore = 0;
-        $scope.turnScore = 0;
         $scope.rolledDice = [];
         $scope.selectedDice = [];
         $scope.roundScore = 0;
         $scope.currentPlayerIndex = 0;
-        $scope.players = [];
+        $scope.players = [{name: 'Kevin', score: 0}];
         $scope.emptyDisplayArray = [{}, {}, {}, {}, {}, {}];
+        $scope.disableRollButton = false;
         $scope.totalDiceAvailableToRoll = 6;
         const ONE = {image: $scope.imgPrefix + 'dice-one.png', value: 1, selectable: false},
             TWO = {image: $scope.imgPrefix + 'dice-two.png', value: 2, selectable: false},
@@ -60,6 +60,8 @@ angular.module('mainPage.farkle', ['ngRoute'])
         };
 
         $scope.rollDice = function () {
+            $scope.disableRollButton = true;
+            $scope.gameHasBegun = true;
             $scope.farkle = false;
             $scope.displayDice = [];
             $scope.rolledDice = [];
@@ -70,13 +72,20 @@ angular.module('mainPage.farkle', ['ngRoute'])
             for (var i = 0; i < $scope.totalDiceAvailableToRoll; i++) {
                 $scope.rolledDice[i] = getDiceValue();
             }
+            for (var j = 0; j < $scope.selectedDice.length; j++) {
+                $scope.selectedDice[j].selectable = false;
+                //TODO separate selectable and saved dice
+            }
+
             var diceWithNumbers = giveDiceValue($scope.rolledDice);
             var potentialValue = addUpValueOfDice(diceWithNumbers, true);
             if (potentialValue === 0) {
                 $scope.farkle = true;
+                $scope.players[$scope.currentPlayerIndex].active = false;
+                $scope.disableRollButton = false;
                 $timeout(function() { nextRound() }, 1500);
             }
-
+            $scope.players[$scope.currentPlayerIndex].active = true;
         };
 
         function addUpValueOfDice(allDice, buildUpDisplay) {
@@ -129,6 +138,8 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 $scope.straight = true;
                 $scope.displayDice = [ONE_SELECTABLE, TWO_SELECTABLE, THREE_SELECTABLE,
                     FOUR_SELECTABLE, FIVE_SELECTABLE, SIX_SELECTABLE];
+                //TODO Move straight down as a group
+
                 return true;
             } else {
                 return false;
@@ -253,13 +264,17 @@ angular.module('mainPage.farkle', ['ngRoute'])
         }
 
         $scope.selectDice = function (dieObject, index) {
-            if (!searchForGroupsToSelect(dieObject)) {
+            if ($scope.straight) {
+                $scope.selectedDice = Array.from($scope.displayDice);
+                $scope.displayDice = [];
+            } else if (!searchForGroupsToSelect(dieObject)) {
                 $scope.displayDice.splice(index, 1);
                 $scope.totalDiceAvailableToRoll--;
                 $scope.selectedDice.push(dieObject);
                 var selectedDiceInNumberedArrays = giveDiceValue(dieObject);
                 $scope.roundScore += addUpValueOfDice(selectedDiceInNumberedArrays, false);
             }
+            $scope.disableRollButton = false;
         };
 
         $scope.deselectDice = function (dieObject, index) {
@@ -270,21 +285,35 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 var deselectedDiceInNumberedArrays = giveDiceValue(dieObject);
                 $scope.roundScore -= addUpValueOfDice(deselectedDiceInNumberedArrays, false);
             }
+            if ($scope.selectedDice.length === 0) {
+                $scope.disableRollButton = true;
+            }
         };
 
         $scope.addUpScoreOfSelectedDice = function () {
             $scope.players[$scope.currentPlayerIndex].score += $scope.roundScore;
+            $scope.players[$scope.currentPlayerIndex].active = false;
             nextRound();
         };
 
         function nextRound() {
             $scope.roundScore = 0;
-            $scope.turnScore = 0;
             $scope.selectedDice = [];
             $scope.displayDice = [];
             $scope.totalDiceAvailableToRoll = 6;
             switchPlayers();
         }
+
+        $scope.newGame = function () {
+            $scope.gameHasBegun = false;
+            $scope.roundScore = 0;
+            $scope.selectedDice = [];
+            $scope.displayDice = [];
+            $scope.totalDiceAvailableToRoll = 6;
+            for (var i = 0; i < $scope.players.length; i++) {
+                $scope.players[i].score = 0;
+            }
+        };
 
         function searchForGroupsToSelect(die) {
             var group = [];
@@ -337,15 +366,30 @@ angular.module('mainPage.farkle', ['ngRoute'])
             }
         };
 
-        $scope.players = [{name: 'Kevin', score: 0}];
-
         $scope.addPlayer = function(playerName) {
+            if (playerName === undefined || playerName == null || playerName === '') {
+                $scope.alertMessage = 'Please enter a name.';
+                $timeout(function() { alertMessage() }, 2500);
+                return;
+            }
             var player = {
                 name: playerName,
                 score: 0
             };
-            $scope.players.push(player)
+            for (var i = 0; i < $scope.players.length; i++) {
+                if ($scope.players[i].name === player.name) {
+                    $scope.alertMessage = 'That player is already in the game.';
+                    $timeout(function() { alertMessage() }, 2500);
+                    return;
+                }
+            }
+            $scope.players.push(player);
+            $scope.playerName = '';
         };
+
+        function alertMessage() {
+            $scope.alertMessage = '';
+        }
 
         $scope.removePlayer = function(player) {
             $scope.players.pop(player);
@@ -357,6 +401,7 @@ angular.module('mainPage.farkle', ['ngRoute'])
             } else {
                 $scope.currentPlayerIndex = 0;
             }
+            $scope.players[$scope.currentPlayerIndex].active = true;
         }
 
     }]);
