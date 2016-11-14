@@ -16,11 +16,11 @@ angular.module('mainPage', [
     }])
     .controller('mainCtrl', ['$scope', function ($scope) {
         $scope.$on('$locationChangeStart', function (event, next, current) {
-            if(next.includes('work')) {
+            if(next.search('work') > -1) {
                 $scope.headshot = 'img/headshot3.jpg';
-            } else if(next.includes('resume')) {
+            } else if(next.search('resume') > -1) {
                 $scope.headshot = 'img/headshot.jpg';
-            } else if(next.includes('contact')) {
+            } else if(next.search('contact') > -1) {
                 $scope.headshot = 'img/headshot2.jpg';
             } else {
                 $scope.headshot = 'img/headshot4.jpg';
