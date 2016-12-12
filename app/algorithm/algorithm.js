@@ -86,21 +86,36 @@ angular.module('mainPage.algorithm', ['ngRoute'])
             return quickSort(left).concat(pivot, quickSort(right));
         };
 
+        var selectionSort = function (input) {
+            for (let j = 0; j < input.length; j++) {
+                var lowest = input[j];
+                var temp = j;
+                for (let i = 1 + j; i < input.length; i++) {
+                    if (input[i] < lowest) {
+                        var temp = i;
+                        lowest = input[i];
+                    }
+                }
+                input[temp] = input[j];
+                input[j] = lowest;
+            }
+            return input;
+        };
+
         var displaySortSpeed = function (sortMethod) {
             var numbers = $scope.getNumbers().slice(0);
             var start = window.performance.now();
-            var sortedArray = sortMethod(numbers, 0, numbers.length - 1);
-            console.log(sortedArray);
+            var sortedArray = sortMethod(numbers);
             var end = window.performance.now();
-            var sortTime = (end - start).toFixed(3);
-            console.log(sortTime);
-            return sortTime;
+            return (end - start).toFixed(3);
         };
 
         var completeAlgorithmTests = function () {
+            //convert to ng-repeat
             $scope.quickSortTime = displaySortSpeed(quickSort);
             $scope.bubbleSortTime = displaySortSpeed(bubbleSort);
             $scope.mergeSortTime = displaySortSpeed(mergeSort);
+            $scope.selectionSortTime = displaySortSpeed(selectionSort);
         };
 
         $scope.$watch('totalNumber', function() {
