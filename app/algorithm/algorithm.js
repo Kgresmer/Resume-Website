@@ -53,40 +53,28 @@ angular.module('mainPage.algorithm', ['ngRoute'])
         };
         
         var mergeSort = function (inputArray) {
-            let n = Math.ceil(inputArray.length); //whole number?
-            var middle, left, right;
-            if (n < 2) return;
+            let n = inputArray.length;
+            if (n < 2) return inputArray;
 
-            middle = n/2;
-            left = [];
-            right = [];
-            for (let i = 0; i <n-1; i++) {
-                if (i < middle -1) left[i] = inputArray[i];
-                if (i >= middle) right[i - middle] = inputArray[i];
-            }
-            mergeSort(left);
-            mergeSort(right);
-            return merge(left, left.length, right, right.length, inputArray);
+            var middle =  Math.floor(n/2);
+            var left = inputArray.slice(0, middle);
+            var right = inputArray.slice(middle);
+            return merge(mergeSort(left), mergeSort(right));
         };
 
-        var merge = function (leftArray, leftLength, rightArray, rightLength, array) {
+        var merge = function (leftArray, rightArray) {
             //separate out the list of numbers into lists of just one item
             //and then slowly merge all the lists back together again.
-            let i = 0, j = 0, k = 0;
+            let i = 0, j = 0, leftLength = leftArray.length, rightLength = rightArray.length;
+            var result = [];
             while (i < leftLength && j < rightLength) {
-                if (leftLength[i] < rightLength[j]) {
-                    array[k++] = leftArray[i++];
+                if (leftArray[i] < rightArray[j]) {
+                    result.push(leftArray[i++]);
                 } else {
-                    array[k++] = rightArray[j++];
+                    result.push(rightArray[j++]);
                 }
             }
-            while (i < leftLength) {
-                array[k++] = leftArray[i++];
-            }
-            while (j < rightLength) {
-                array[k++] = rightArray[j++];
-            }
-            return array;
+            return result.concat(leftArray.slice(i)).concat(rightArray.slice(j));
         };
 
         var quickSort = function (a) {
@@ -101,7 +89,8 @@ angular.module('mainPage.algorithm', ['ngRoute'])
         var displaySortSpeed = function (sortMethod) {
             var numbers = $scope.getNumbers().slice(0);
             var start = window.performance.now();
-            sortMethod(numbers, 0, numbers.length - 1);
+            var sortedArray = sortMethod(numbers, 0, numbers.length - 1);
+            console.log(sortedArray);
             var end = window.performance.now();
             var sortTime = (end - start).toFixed(3);
             console.log(sortTime);
