@@ -8,19 +8,20 @@ angular.module('mainPage.farkle', ['ngRoute'])
             controller: 'FarkleController'
         });
     }])
-    .controller('FarkleController', ['$scope', '$location', '$timeout', function ($scope, $location, $timeout) {
+    .controller('FarkleController', ['$scope', '$location', '$timeout', '$rootScope', function ($scope, $location, $timeout, $rootScope) {
 
 
         $scope.imgPrefix = $location.absUrl().includes('kgresmer.github') ? 'img/' : '../img/';
         $scope.totalScore = 0;
         $scope.rolledDice = [];
+        $scope.displayDice = [];
         $scope.selectedDice = [];
         $scope.roundScore = 0;
         $scope.currentPlayerIndex = 0;
         $scope.players = [{name: 'Kevin', score: 0}];
         $scope.emptyDisplayArray = [{}, {}, {}, {}, {}, {}];
-        $scope.disableRollButton = false;
         $scope.totalDiceAvailableToRoll = 6;
+        $scope.players[$scope.currentPlayerIndex].active = true;
         const ONE = {image: $scope.imgPrefix + 'dice-one.png', value: 1, selectable: false},
             TWO = {image: $scope.imgPrefix + 'dice-two.png', value: 2, selectable: false},
             THREE = {image: $scope.imgPrefix + 'dice-three.png', value: 3, selectable: false},
@@ -38,7 +39,6 @@ angular.module('mainPage.farkle', ['ngRoute'])
             var value = Math.floor(Math.random() * 6) + 1;
             switch (value) {
                 case 1:
-
                     return ONE;
                     break;
                 case 2:
@@ -60,32 +60,31 @@ angular.module('mainPage.farkle', ['ngRoute'])
         };
 
         $scope.rollDice = function () {
-            $scope.disableRollButton = true;
             $scope.gameHasBegun = true;
             $scope.farkle = false;
             $scope.displayDice = [];
             $scope.rolledDice = [];
+            $scope.straight = false;
             if ($scope.totalDiceAvailableToRoll === 0 && $scope.roundScore !== 0) {
                 $scope.totalDiceAvailableToRoll = 6;
                 $scope.selectedDice = [];
             }
-            for (var i = 0; i < $scope.totalDiceAvailableToRoll; i++) {
-                $scope.rolledDice[i] = getDiceValue();
+            if ($scope.selectedDice.length === 6 && $scope.roundScore !== 0) {
+                $scope.selectedDice = [];
             }
             for (var j = 0; j < $scope.selectedDice.length; j++) {
                 $scope.selectedDice[j].selectable = false;
-                //TODO separate selectable and saved dice
+            }
+            for (var i = 0; i < $scope.totalDiceAvailableToRoll; i++) {
+                $scope.rolledDice[i] = getDiceValue();
             }
 
             var diceWithNumbers = giveDiceValue($scope.rolledDice);
             var potentialValue = addUpValueOfDice(diceWithNumbers, true);
             if (potentialValue === 0) {
                 $scope.farkle = true;
-                $scope.players[$scope.currentPlayerIndex].active = false;
-                $scope.disableRollButton = false;
                 $timeout(function() { nextRound() }, 1500);
             }
-            $scope.players[$scope.currentPlayerIndex].active = true;
         };
 
         function addUpValueOfDice(allDice, buildUpDisplay) {
@@ -138,7 +137,6 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 $scope.straight = true;
                 $scope.displayDice = [ONE_SELECTABLE, TWO_SELECTABLE, THREE_SELECTABLE,
                     FOUR_SELECTABLE, FIVE_SELECTABLE, SIX_SELECTABLE];
-                //TODO Move straight down as a group
 
                 return true;
             } else {
@@ -162,13 +160,25 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 }
 
                 if (currentNumberArray.length === 6) {
-                    addedValue = currentNumberArray[0].value * 400;
+                    if (currentNumberArray[0].value === 1) {
+                        addedValue += 4000;
+                    } else {
+                        addedValue += currentNumberArray[0].value * 400;
+                    }
                     buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 6, true) : '';
                 } else if (currentNumberArray.length === 5) {
-                    addedValue += currentNumberArray[0].value * 300;
+                    if (currentNumberArray[0].value === 1) {
+                        addedValue += 3000;
+                    } else {
+                        addedValue += currentNumberArray[0].value * 300;
+                    }
                     buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 5, true) : '';
                 } else if (currentNumberArray.length === 4) {
-                    addedValue += currentNumberArray[0].value * 200;
+                    if (currentNumberArray[0].value === 1) {
+                        addedValue += 2000;
+                    } else {
+                        addedValue += currentNumberArray[0].value * 200;
+                    }
                     buildUpDisplay ? addToDisplay(currentNumberArray[0].value, 4, true) : '';
                 } else if (currentNumberArray.length === 3) {
                     if (currentNumberArray[0].value === 1) {
@@ -220,42 +230,42 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 switch (value) {
                     case 1:
                         if (selectable) {
-                            $scope.displayDice.push(ONE_SELECTABLE);
+                            $scope.displayDice.push({image: $scope.imgPrefix + 'dice-one.png', value: 1, selectable: true});
                         } else {
                             $scope.displayDice.push(ONE);
                         }
                         continue;
                     case 2:
                         if (selectable) {
-                            $scope.displayDice.push(TWO_SELECTABLE);
+                            $scope.displayDice.push({image: $scope.imgPrefix + 'dice-two.png', value: 2, selectable: true});
                         } else {
                             $scope.displayDice.push(TWO);
                         }
                         continue;
                     case 3:
                         if (selectable) {
-                            $scope.displayDice.push(THREE_SELECTABLE);
+                            $scope.displayDice.push({image: $scope.imgPrefix + 'dice-three.png', value: 3, selectable: true});
                         } else {
                             $scope.displayDice.push(THREE);
                         }
                         continue;
                     case 4:
                         if (selectable) {
-                            $scope.displayDice.push(FOUR_SELECTABLE);
+                            $scope.displayDice.push({image: $scope.imgPrefix + 'dice-four.png', value: 4, selectable: true});
                         } else {
                             $scope.displayDice.push(FOUR);
                         }
                         continue;
                     case 5:
                         if (selectable) {
-                            $scope.displayDice.push(FIVE_SELECTABLE);
+                            $scope.displayDice.push({image: $scope.imgPrefix + 'dice-five.png', value: 5, selectable: true});
                         } else {
                             $scope.displayDice.push(FIVE);
                         }
                         continue;
                     case 6:
                         if (selectable) {
-                            $scope.displayDice.push(SIX_SELECTABLE);
+                            $scope.displayDice.push({image: $scope.imgPrefix + 'dice-six.png', value: 6, selectable: true});
                         } else {
                             $scope.displayDice.push(SIX);
                         }
@@ -274,7 +284,6 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 var selectedDiceInNumberedArrays = giveDiceValue(dieObject);
                 $scope.roundScore += addUpValueOfDice(selectedDiceInNumberedArrays, false);
             }
-            $scope.disableRollButton = false;
         };
 
         $scope.deselectDice = function (dieObject, index) {
@@ -285,14 +294,15 @@ angular.module('mainPage.farkle', ['ngRoute'])
                 var deselectedDiceInNumberedArrays = giveDiceValue(dieObject);
                 $scope.roundScore -= addUpValueOfDice(deselectedDiceInNumberedArrays, false);
             }
-            if ($scope.selectedDice.length === 0) {
-                $scope.disableRollButton = true;
-            }
         };
 
         $scope.addUpScoreOfSelectedDice = function () {
             $scope.players[$scope.currentPlayerIndex].score += $scope.roundScore;
-            $scope.players[$scope.currentPlayerIndex].active = false;
+            if ($scope.players[$scope.currentPlayerIndex].score >= 10000) {
+                //TODO create modal for winner
+                $scope.winner = $scope.players[$scope.currentPlayerIndex];
+                return;
+            }
             nextRound();
         };
 
@@ -305,8 +315,10 @@ angular.module('mainPage.farkle', ['ngRoute'])
         }
 
         $scope.newGame = function () {
+            $scope.winner = null;
             $scope.gameHasBegun = false;
             $scope.roundScore = 0;
+            $scope.currentPlayerIndex = 0;
             $scope.selectedDice = [];
             $scope.displayDice = [];
             $scope.totalDiceAvailableToRoll = 6;
@@ -397,11 +409,22 @@ angular.module('mainPage.farkle', ['ngRoute'])
 
         function switchPlayers() {
             if ($scope.players[$scope.currentPlayerIndex + 1]) {
+                $scope.players[$scope.currentPlayerIndex].active = false;
                 $scope.currentPlayerIndex++;
             } else {
+                $scope.players[$scope.currentPlayerIndex].active = false;
                 $scope.currentPlayerIndex = 0;
             }
             $scope.players[$scope.currentPlayerIndex].active = true;
+        }
+
+        $scope.selectable = function (selectedDie) {
+            if (selectedDie.selectable) {
+                return false;
+            } else {
+                return true;
+            }
+
         }
 
     }]);
