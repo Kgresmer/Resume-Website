@@ -10,6 +10,14 @@ angular.module('mainPage.algorithm', ['ngRoute'])
     }])
     .controller('AlgorithmController', ['$scope', function ($scope) {
 
+        // $scope.$watchGroup(['anagramInputOne', 'anagramInputTwo'], function (newValues, oldValues, scope) {
+        //     if (newValues[0] && newValues[1]) {
+        //         $('#anagramPopover').popover("hide");
+        //     } else {
+        //         $('#anagramPopover').popover("show");
+        //     }
+        // });
+
         $scope.totalNumber = 1000;
         var hundredNumbers = [];
         var thousandNumbers = [];
@@ -20,7 +28,10 @@ angular.module('mainPage.algorithm', ['ngRoute'])
             if (i < 10000) tenThousandNumbers.push(Math.random() * $scope.totalNumber);
         }
 
-
+        var inputOne = document.getElementById('anagramInputOne');
+        var inputTwo = document.getElementById('anagramInputTwo');
+        inputOne.setAttribute('size', inputOne.getAttribute('placeholder').length);
+        inputTwo.setAttribute('size', inputTwo.getAttribute('placeholder').length);
 
 
         $scope.getNumbers = function () {
@@ -51,12 +62,12 @@ angular.module('mainPage.algorithm', ['ngRoute'])
             }
             return items;
         };
-        
+
         var mergeSort = function (inputArray) {
             let n = inputArray.length;
             if (n < 2) return inputArray;
 
-            var middle =  Math.floor(n/2);
+            var middle = Math.floor(n / 2);
             var left = inputArray.slice(0, middle);
             var right = inputArray.slice(middle);
             return merge(mergeSort(left), mergeSort(right));
@@ -118,7 +129,7 @@ angular.module('mainPage.algorithm', ['ngRoute'])
             $scope.selectionSortTime = displaySortSpeed(selectionSort);
         };
 
-        $scope.$watch('totalNumber', function() {
+        $scope.$watch('totalNumber', function () {
             completeAlgorithmTests();
         });
 
@@ -131,13 +142,39 @@ angular.module('mainPage.algorithm', ['ngRoute'])
             var romanNumeral = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX",
                 "V", "IV", "I"];
             //Possible roman numerals up to 1000
-            var numbers = [1000, 900, 500, 400, 100 ,90, 50, 40, 10, 9, 5, 4, 1];
-            for(var i = 0; i < numbers.length; i++) {
-                while(num>=numbers[i]) {
+            var numbers = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+            for (var i = 0; i < numbers.length; i++) {
+                while (num >= numbers[i]) {
                     roman = roman + romanNumeral[i];
                     num = num - numbers[i];
                 }
             }
             return roman;
-        }
+        };
+
+        $scope.testAnagramInput = function () {
+            if (!($scope.anagramInputOne && $scope.anagramInputTwo)) {
+                $('#anagramPopover').popover("show");
+                setTimeout(function () {
+                    $('#anagramPopover').popover("hide")
+                }, 2000);
+                return;
+            }
+            var inputOne = $scope.anagramInputOne.split(' ').join('');
+            var inputTwo = $scope.anagramInputTwo.split(' ').join('');
+            if (inputOne.length !== inputTwo.length) {
+                $scope.anagramOutput = false;
+                return;
+            }
+            for (var i = 0; i < inputTwo.length; i++) {
+                var index = inputOne.indexOf(inputTwo[i]);
+                if (index === -1) {
+                    $scope.anagramOutput = false;
+                    return;
+                } else {
+                    inputOne = inputOne.slice(index + 1);
+                }
+            }
+            $scope.anagramOutput = true;
+        };
     }]);

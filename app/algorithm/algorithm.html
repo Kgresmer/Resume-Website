@@ -28,14 +28,44 @@
                 <p>Number of Milliseconds to sort an array with {{totalNumber}} numbers:
                     {{selectionSortTime}}</p>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <h3>Roman Numeral Converter</h3>
                 <label for="romanInput"></label>
-                <input id="romanInput" type="number" placeholder="Enter a value ex: 5" value="romanInput" ng-model="romanInput"/>
+                <input id="romanInput" type="number" placeholder="Enter a value ex: 5" value="romanInput"
+                       ng-model="romanInput"/>
                 <p ng-if="romanInput && romanInput < 1000">
                     {{romanInput}} converts to roman numeral <strong>{{convert()}}</strong>
                 </p>
                 <p ng-if="romanInput > 1000">Converter is set to work with numbers less than 1000</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <h3>Is it an anagram?</h3>
+                <form name="anagramForm">
+                    <label for="anagramInputOne">Input One</label><br>
+                    <input id="anagramInputOne" type="text"
+                           placeholder="Enter a word or short phrase ex: I am a weakish speller"
+                           ng-model="anagramInputOne" required/>
+                    <br>
+                    <label for="anagramInputTwo">Input Two</label><br>
+                    <input id="anagramInputTwo" type="text"
+                           placeholder="Enter another word or short phrase ex: William Shakespeare"
+                           ng-model="anagramInputTwo" required/>
+                </form>
+                <p>
+                    <strong ng-if="anagramOutput"> Success! </strong>
+                    <strong ng-if="!anagramOutput"> Nope, that ain't right. </strong>
+                </p>
+                <button class="inputButtons"
+                        id="anagramPopover"
+                        ng-click="testAnagramInput()"
+                        data-placement="bottom"
+                        data-original-title="Not Enough Words"
+                        data-trigger="manual"
+                        data-content="I need two inputs to compute if they are an anagram">
+                    Search
+                </button>
             </div>
         </div>
         <div class="row">

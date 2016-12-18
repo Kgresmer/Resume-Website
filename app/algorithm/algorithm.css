@@ -6,3 +6,12 @@
 #romanInput {
     color: black;
 }
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+input, .popover, .popover-title, .popover-content {
+    color: black;
+}
