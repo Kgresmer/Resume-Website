@@ -88,11 +88,11 @@ angular.module('mainPage.algorithm', ['ngRoute'])
 
         var selectionSort = function (input) {
             for (let j = 0; j < input.length; j++) {
-                var lowest = input[j];
-                var temp = j;
+                let lowest = input[j];
+                let temp = j;
                 for (let i = 1 + j; i < input.length; i++) {
                     if (input[i] < lowest) {
-                        var temp = i;
+                        temp = i;
                         lowest = input[i];
                     }
                 }
@@ -139,5 +139,24 @@ angular.module('mainPage.algorithm', ['ngRoute'])
                 }
             }
             return roman;
-        }
+        };
+
+        $scope.binarySearch = function (array, targetValue) {
+            let min = 0;
+            let max = array.length - 1;
+            let guess;
+            while (max >= min) {
+                guess = (max + min) / 2 | 0;
+                if (array[guess] < targetValue) {
+                    min = guess + 1;
+                } else if (array[guess] > targetValue) {
+                    max = guess - 1;
+                } else {
+                    console.log(guess + " " + array[guess]);
+                    return guess;
+                }
+            }
+            return -1;
+        };
+        $scope.binarySearch([1,7,11,13,17,19,23,25,29,30,31,35,42,56,67,68,69,70,81], 31);
     }]);
